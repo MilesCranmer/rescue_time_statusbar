@@ -127,8 +127,11 @@ def save_data(cdate):
 
 
 # %%
-def update_history():
-    for i in range(1, 14):
-        save_data(date.today()-relativedelta.relativedelta(days=i))
+def update_history(days=14, start=1):
+    for i in range(start, days):
+        try:
+            save_data(date.today()-relativedelta.relativedelta(days=i))
+        except:
+            continue
 
 # %%
