@@ -39,6 +39,32 @@ def score_day(cdate):
 
 
 # %%
-score_day(date.today())
+def weekday(cdate):
+    return d.weekday()
+
+
+# %%
+def score_over_time(cdate, weeks=1):
+    cweekday = weekday(cdate)
+    days_to_monday = cweekday
+    days_to_score = days_to_monday + 7*weeks
+    day_start = cdate - td(days=days_to_score)
+    scores = -np.ones((weeks+1, 7)).ravel()
+    for i in range(days_to_score+1):
+        cur_day = day_start + td(days=i)
+        try:
+            cur_score = score_day(cur_day)
+            scores[i] = cur_score
+        except FileNotFoundError:
+            continue
+            
+    scores = scores.reshape(weeks+1, 7)
+    return scores
+
+
+# %%
+score_over_time(date.today(), 2)
+
+# %%
 
 # %%
