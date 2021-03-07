@@ -18,7 +18,7 @@ class SomeApp(rumps.App):
 
     @rumps.timer(2)
     def refresh(self, t):
-        self.title = f'score={self.score:.1f}'
+        self.title = f'score={self.score:.2f}'
 
     @rumps.clicked("Week")
     def week(self, sender):
