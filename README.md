@@ -20,7 +20,8 @@ Run the status bar app with:
 python app.py
 ```
 
-This will display the productivity pulse. Unlike the
+This will display the productivity pulse, and automatically update the current day's
+score. Unlike the
 dashboard, this pulse also includes mobile time.
 
 ## Requirements
