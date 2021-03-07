@@ -116,9 +116,14 @@ def get_data(cdate):
 
 
 # %%
+def fname(cdate):
+    return 'data/' + str(cdate) + '.csv'
+
+
+# %%
 def save_data(cdate):
     df = get_data(cdate)
-    df.to_csv('data/' + str(date.today()) + '.csv', sep='\t')
+    df.to_csv(fname(cdate), sep='\t')
 
 
 # %%
