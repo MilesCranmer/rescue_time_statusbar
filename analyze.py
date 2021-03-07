@@ -60,7 +60,3 @@ def score_over_time(cdate, weeks=1):
             
     scores = scores.reshape(weeks+1, 7)
     return scores
-
-# %%
-
-# %%
