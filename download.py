@@ -116,9 +116,11 @@ def get_data(cdate):
 
 
 # %%
-get_data(date.today())
+def save_data(cdate):
+    df = get_data(cdate)
+    df.to_csv('data/' + str(date.today()) + '.csv', sep='\t')
 
-    # %%
-    # activities_per_minute.to_csv(
-    #     'data/rescuetime-by-minute' + start_date
-    #      + '-to-' + end_date + '.csv')
+
+# %%
+for i in range(1, 30):
+    save_data(date.today()-relativedelta.relativedelta(days=i))
