@@ -19,6 +19,6 @@ from download import save_data
 from datetime import date
 
 # %%
-save_data(date.today())
+update_history(days=14, start=0)
 
 # %%
