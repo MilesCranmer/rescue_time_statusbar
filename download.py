@@ -78,7 +78,6 @@ def _rescuetime_get_activities(payload):
     for i in range(delta.days + 1):
         # Find iter date and set begin and end values to this to extract at once.
         d3 = d1 + td(days=i) # Add a day
-        print('Pulling daily data for ', d3)
 
         # Update the Payload
         payload['restrict_begin'] = str(d3) # Set payload days to current
@@ -102,6 +101,7 @@ def get_data(cdate):
     all_activities = []
     start_date = str(cdate - relativedelta.relativedelta(days=0))
     end_date = str(cdate)
+    print('Pulling daily data for ', start_date)
 
     for device in ['computers', 'mobile']:
         activities_minute_log = rescuetime_get_activities(
@@ -122,5 +122,8 @@ def save_data(cdate):
 
 
 # %%
-for i in range(1, 30):
-    save_data(date.today()-relativedelta.relativedelta(days=i))
+def update_history():
+    for i in range(1, 14):
+        save_data(date.today()-relativedelta.relativedelta(days=i))
+
+# %%
