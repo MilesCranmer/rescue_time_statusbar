@@ -5,9 +5,9 @@ from download import save_data
 from time import sleep
 import numpy as np
 
-class SomeApp(rumps.App):
+class RescueTime(rumps.App):
     def __init__(self):
-        super(SomeApp, self).__init__(type(self).__name__, menu=['Week'])
+        super(RescueTime, self).__init__(type(self).__name__, menu=['Week'])
         self.score = 0
         rumps.debug_mode(True)
 
@@ -28,4 +28,4 @@ class SomeApp(rumps.App):
         rumps.Window(str(scores)).run()
 
 if __name__ == "__main__":
-    SomeApp().run()
+    RescueTime().run()
