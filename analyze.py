@@ -23,7 +23,12 @@ import numpy as np
 
 # %%
 def load_data(cdate):
-    return pd.read_csv(fname(cdate), sep='\t')
+    try:
+        return pd.read_csv(fname(cdate), sep='\t')
+    except FileNotFoundError:
+        return pd.DataFrame({key: [] for key in [
+            'Date', 'Seconds', 'NumberPeople', 'Actitivity',
+            'Document', 'Category', 'Productivity']})
 
 
 # %%
@@ -34,6 +39,8 @@ def load_data_week(cdate):
 # %%
 def score_day(cdate):
     df = load_data(cdate)
+    if np.sum(df.Seconds) == 0.0:
+        return 0.0
     score = np.sum((df.Productivity + 2) * df.Seconds) / (4 * np.sum(df.Seconds))
     return score*100
 

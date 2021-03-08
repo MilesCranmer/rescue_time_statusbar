@@ -104,13 +104,18 @@ def get_data(cdate):
     print('Pulling daily data for ', start_date)
 
     for device in ['computers', 'mobile']:
-        activities_minute_log = rescuetime_get_activities(
-            start_date, end_date, 'minute', device=device)
-        activities_per_minute = pd.DataFrame.from_dict(activities_minute_log)
-        activities_per_minute.columns = [
-            'Date', 'Seconds', 'NumberPeople', 'Actitivity',
-            'Document', 'Category', 'Productivity']
-        all_activities.append(activities_per_minute)
+        try:
+            activities_minute_log = rescuetime_get_activities(
+                start_date, end_date, 'minute', device=device)
+            activities_per_minute = pd.DataFrame.from_dict(activities_minute_log)
+            activities_per_minute.columns = [
+                'Date', 'Seconds', 'NumberPeople', 'Actitivity',
+                'Document', 'Category', 'Productivity']
+            all_activities.append(activities_per_minute)
+        except ValueError:
+            all_activities.append(pd.DataFrame({key: [] for key in [
+                'Date', 'Seconds', 'NumberPeople', 'Actitivity',
+                'Document', 'Category', 'Productivity']}))
 
     return pd.concat(all_activities)
 
