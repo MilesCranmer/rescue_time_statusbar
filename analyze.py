@@ -72,7 +72,7 @@ def score_over_time(cdate, weeks=1):
 # %%
 def writing_time(cdate):
     df = load_data(cdate)
-    sites = ["overleaf.com", "hyper", "scholar.google.com", "arxiv.org"]
+    sites = ["overleaf.com", "hyper", "scholar.google.com", "arxiv.org", "microsoft powerpoint", "Google Documents", "Google Presentations"]
     minutes = df.query(f'Activity in {sites}').Seconds.sum()/60.0
     return minutes
 
