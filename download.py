@@ -138,5 +138,3 @@ def update_history(days=14, start=1):
             save_data(date.today()-relativedelta.relativedelta(days=i))
         except:
             continue
-
-# %%

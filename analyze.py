@@ -67,3 +67,13 @@ def score_over_time(cdate, weeks=1):
             
     scores = scores.reshape(weeks+1, 7)
     return scores
+
+
+# %%
+def writing_time(cdate):
+    df = load_data(cdate)
+    sites = ["overleaf.com", "hyper", "scholar.google.com", "arxiv.org"]
+    minutes = df.query(f'Activity in {sites}').Seconds.sum()/60.0
+    return minutes
+
+# %%
