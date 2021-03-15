@@ -109,12 +109,12 @@ def get_data(cdate):
                 start_date, end_date, 'minute', device=device)
             activities_per_minute = pd.DataFrame.from_dict(activities_minute_log)
             activities_per_minute.columns = [
-                'Date', 'Seconds', 'NumberPeople', 'Actitivity',
+                'Date', 'Seconds', 'NumberPeople', 'Activity',
                 'Document', 'Category', 'Productivity']
             all_activities.append(activities_per_minute)
         except ValueError:
             all_activities.append(pd.DataFrame({key: [] for key in [
-                'Date', 'Seconds', 'NumberPeople', 'Actitivity',
+                'Date', 'Seconds', 'NumberPeople', 'Activity',
                 'Document', 'Category', 'Productivity']}))
 
     return pd.concat(all_activities)

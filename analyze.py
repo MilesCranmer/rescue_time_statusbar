@@ -27,7 +27,7 @@ def load_data(cdate):
         return pd.read_csv(fname(cdate), sep='\t')
     except FileNotFoundError:
         return pd.DataFrame({key: [] for key in [
-            'Date', 'Seconds', 'NumberPeople', 'Actitivity',
+            'Date', 'Seconds', 'NumberPeople', 'Activity',
             'Document', 'Category', 'Productivity']})
 
 
