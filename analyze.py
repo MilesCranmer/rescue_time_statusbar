@@ -75,5 +75,3 @@ def writing_time(cdate):
     sites = ["overleaf.com", "hyper", "scholar.google.com", "arxiv.org", "microsoft powerpoint", "Google Documents", "Google Presentations"]
     minutes = df.query(f'Activity in {sites}').Seconds.sum()/60.0
     return minutes
-
-# %%

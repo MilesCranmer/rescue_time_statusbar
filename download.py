@@ -103,7 +103,7 @@ def get_data(cdate):
     end_date = str(cdate)
     print('Pulling daily data for ', start_date)
 
-    for device in ['computers', 'mobile']:
+    for device in ['computers', 'mobile', 'offline']:
         try:
             activities_minute_log = rescuetime_get_activities(
                 start_date, end_date, 'minute', device=device)
