@@ -24,11 +24,22 @@ import numpy as np
 # %%
 def load_data(cdate):
     try:
-        return pd.read_csv(fname(cdate), sep='\t')
+        return pd.read_csv(fname(cdate), sep="\t")
     except FileNotFoundError:
-        return pd.DataFrame({key: [] for key in [
-            'Date', 'Seconds', 'NumberPeople', 'Activity',
-            'Document', 'Category', 'Productivity']})
+        return pd.DataFrame(
+            {
+                key: []
+                for key in [
+                    "Date",
+                    "Seconds",
+                    "NumberPeople",
+                    "Activity",
+                    "Document",
+                    "Category",
+                    "Productivity",
+                ]
+            }
+        )
 
 
 # %%
@@ -42,7 +53,7 @@ def score_day(cdate):
     if np.sum(df.Seconds) == 0.0:
         return 0.0
     score = np.sum((df.Productivity + 2) * df.Seconds) / (4 * np.sum(df.Seconds))
-    return score*100
+    return score * 100
 
 
 # %%
@@ -54,24 +65,32 @@ def weekday(cdate):
 def score_over_time(cdate, weeks=1):
     cweekday = weekday(cdate)
     days_to_monday = cweekday
-    days_to_score = days_to_monday + 7*weeks
+    days_to_score = days_to_monday + 7 * weeks
     day_start = cdate - td(days=days_to_score)
-    scores = -np.ones((weeks+1, 7)).ravel()
-    for i in range(days_to_score+1):
+    scores = -np.ones((weeks + 1, 7)).ravel()
+    for i in range(days_to_score + 1):
         cur_day = day_start + td(days=i)
         try:
             cur_score = score_day(cur_day)
             scores[i] = cur_score
         except FileNotFoundError:
             continue
-            
-    scores = scores.reshape(weeks+1, 7)
+
+    scores = scores.reshape(weeks + 1, 7)
     return scores
 
 
 # %%
 def writing_time(cdate):
     df = load_data(cdate)
-    sites = ["overleaf.com", "hyper", "scholar.google.com", "arxiv.org", "microsoft powerpoint", "Google Documents", "Google Presentations"]
-    minutes = df.query(f'Activity in {sites}').Seconds.sum()/60.0
+    sites = [
+        "overleaf.com",
+        "hyper",
+        "scholar.google.com",
+        "arxiv.org",
+        "microsoft powerpoint",
+        "Google Documents",
+        "Google Presentations",
+    ]
+    minutes = df.query(f"Activity in {sites}").Seconds.sum() / 60.0
     return minutes
